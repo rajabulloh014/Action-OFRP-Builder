@@ -129,6 +129,8 @@ jobs:
         set +e
         source build/envsetup.sh
         export ALLOW_MISSING_DEPENDENCIES=true
+        export FOX_BUILD_TYPE="Stable"
+        export FOX_MAINTAINER_PATCH_VERSION="2"
         set -e
 
         lunch ${{ env.MAKEFILE_NAME }}
