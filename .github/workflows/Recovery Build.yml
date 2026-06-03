@@ -7,9 +7,9 @@ on:
         description: "Select device tree repository"
         required: true
         type: choice
-        default: https://github.com/AzzyC/ofox_device_xiaomi_peridot
+        default: https://github.com/mr3333-droid/ofox_device_xiaomi_zorn
         options:
-          - https://github.com/AzzyC/ofox_device_xiaomi_peridot
+          - https://github.com/mr3333-droid/ofox_device_xiaomi_zorn
           - https://gitlab.com/OrangeFox/device/peridot_new
 
       device_tree_branch:
@@ -34,9 +34,9 @@ jobs:
       MANIFEST_BRANCH: 14.1
       DEVICE_TREE_URL: ${{ inputs.device_tree_url }}
       DEVICE_TREE_BRANCH: ${{ inputs.device_tree_branch }}
-      DEVICE_PATH: device/xiaomi/peridot
-      DEVICE_NAME: peridot
-      MAKEFILE_NAME: twrp_peridot-ap2a-eng
+      DEVICE_PATH: device/xiaomi/zorn
+      DEVICE_NAME: zorn
+      MAKEFILE_NAME: twrp_zorn-eng
       BUILD_TARGET: recovery
 
       # Maximise workflow / instance to GitHub's 6 hour limit
