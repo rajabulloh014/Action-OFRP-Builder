@@ -36,7 +36,7 @@ jobs:
       DEVICE_TREE_BRANCH: ${{ inputs.device_tree_branch }}
       DEVICE_PATH: device/xiaomi/zorn
       DEVICE_NAME: zorn
-      MAKEFILE_NAME: twrp_zorn-eng
+      MAKEFILE_NAME: twrp_zorn-ap2a-eng
       BUILD_TARGET: recovery
 
       # Maximise workflow / instance to GitHub's 6 hour limit
