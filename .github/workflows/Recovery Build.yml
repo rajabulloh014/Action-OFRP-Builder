@@ -104,6 +104,34 @@ jobs:
         git clone --depth=1 ${{ env.DEVICE_TREE_URL }} -b ${{ env.DEVICE_TREE_BRANCH }} ./${{ env.DEVICE_PATH }}
       working-directory: ${{ steps.pwd.outputs.workspace-folder }}
 
+    - name: Inject OF_MAINTAINER into device tree makefile
+      run: |
+         cd ${{ steps.pwd.outputs.workspace-folder }}/fox_${{ env.MANIFEST_BRANCH }}/${{ env.DEVICE_PATH }}
+         # Cari file .mk yang mengandung PRODUCT_NAME atau yang biasa dipakai untuk maintainer
+         TARGET_MK=""
+         for f in *.mk; do
+          if grep -q "PRODUCT_NAME" "$f" 2>/dev/null; then
+           TARGET_MK="$f"
+           break
+          fi
+         done
+         # Jika tidak ditemukan, coba fox_zorn.mk atau twrp_zorn.mk
+         [ -z "$TARGET_MK" ] && [ -f "fox_zorn.mk" ] && TARGET_MK="fox_zorn.mk"
+         [ -z "$TARGET_MK" ] && [ -f "twrp_zorn.mk" ] && TARGET_MK="twrp_zorn.mk"
+    
+          if [ -z "$TARGET_MK" ]; then
+           echo "⚠️ Tidak menemukan file .mk yang cocok, skipping OF_MAINTAINER"
+           exit 0
+          fi
+    
+         echo "Menambahkan OF_MAINTAINER ke $TARGET_MK"
+          if ! grep -q "OF_MAINTAINER" "$TARGET_MK"; then
+           echo -e "\nOF_MAINTAINER := JANCOOK" >> "$TARGET_MK"
+           echo "✅ OF_MAINTAINER ditambahkan"
+          else
+           echo "ℹ️ OF_MAINTAINER sudah ada, melewati"
+          fi
+
     - name: Get latest device tree commit
       id: devtree_commit
       run: |
