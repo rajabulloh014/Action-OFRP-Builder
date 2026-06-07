@@ -11,6 +11,7 @@ on:
         options:
           - https://github.com/mr3333-droid/ofox_device_xiaomi_zorn
           - https://gitlab.com/OrangeFox/device/peridot_new
+          - https://github.com/TRFCUTTFwww/device_xiaomi_zorn_OrangeFox
 
       device_tree_branch:
         description: "Select device tree branch"
